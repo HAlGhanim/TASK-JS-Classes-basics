@@ -20,8 +20,37 @@
  * print out the sum of their ages using calculateAge() method
  */
 class Person {
-  // continue the code here
+  constructor(firstName, lastName, gender, birthYear) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+    this.birthYear = birthYear;
+  }
+
+  printName = () => {
+    console.log(`${this.firstName} ${this.lastName}`);
+  };
+
+  calculateAge = (currentYear) => {
+    return currentYear - this.birthYear;
+  };
 }
+const person1 = new Person("Humoud", "AlGhanim", "Male", 1998);
+const person2 = new Person("Sulaiman", "AlGhanim", "Male", 1997);
+const person3 = new Person("Hessa", "AlGhanim", "Female", 2003);
+
+const persons = [person1, person2, person3];
+
+persons.forEach((person) => {
+  person.printName();
+});
+
+const sum = persons.reduce(
+  (total, current) => total + current.calculateAge(2023),
+  0
+);
+
+console.log(sum);
 
 /** (Question 2): (15000 Points)
  * 1. Write a class `Movie`, give it the following properties
@@ -45,8 +74,39 @@ class Person {
  */
 
 class Movie {
-  // continue the code here
+  rating = [];
+
+  constructor(title, duration, genre) {
+    this.title = title;
+    this.duration = duration;
+    this.genre = genre;
+  }
+
+  rate = (score) => {
+    if (score >= 0 && score <= 10) {
+      this.rating.push(score);
+    }
+  };
+  averageRating = () => {
+    const sumOfValues = this.rating.reduce(
+      (total, ratingValue) => total + ratingValue,
+      0
+    );
+    return sumOfValues / this.rating.length;
+  };
 }
+
+const movie1 = new Movie("The Godfather", 175, "Action / Drama");
+const movie2 = new Movie("The Godfather II", 202, "Action / Drama");
+const movie3 = new Movie("The Godfather III", 162, "Action / Drama");
+const movie4 = new Movie("The Shawshank Redemption", 142, "Drama");
+
+movie1.rate(9);
+movie1.rate(9);
+movie1.rate(10);
+movie1.rate(10);
+
+console.log(movie1.averageRating());
 
 /** (Question 3): (1000 Points)
  * 1. Create a class `Actor` that inherits `Person`, and adds the following properties
@@ -57,4 +117,17 @@ class Movie {
  * +
  */
 
-// write the class here
+class Actor extends Person {
+  movies = [];
+
+  constructor(firstName, lastName, gender, birthYear) {
+    super(firstName, lastName, gender, birthYear);
+  }
+  addMovie = (movie) => {
+    this.movies.push(movie);
+  };
+}
+const actor1 = new Actor("Marlon", "Brando", "Male", 1924);
+actor1.addMovie(movie1);
+
+console.log(actor1);
