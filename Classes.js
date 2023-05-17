@@ -46,9 +46,7 @@ persons.forEach((person) => {
 });
 
 const sum = persons.reduce(
-  (total, current) => total + current.calculateAge(2023),
-  0
-);
+  (total, current) => total + current.calculateAge(2023),0);
 
 console.log(sum);
 
